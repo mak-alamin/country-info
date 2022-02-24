@@ -1,9 +1,13 @@
 // Search country
 function searchCountry(searchTerm) {
-  if (searchTerm.trim() == "") {
-    loadCountries("all");
-  } else {
-    loadCountries(`name/${searchTerm}`);
+  let countries = document.getElementsByClassName("card-title");
+
+  for (country of countries) {
+    if (country.innerText.toLowerCase().includes(searchTerm.toLowerCase())) {
+      country.parentElement.parentElement.style.display = "block";
+    } else {
+      country.parentElement.parentElement.style.display = "none";
+    }
   }
 }
 
@@ -13,8 +17,6 @@ function loadCountries(count) {
   fetch(`https://restcountries.com/v2/${count}`)
     .then((response) => response.json())
     .then((countries) => {
-      console.log(countries);
-
       countriesList.innerHTML = "";
       countries.forEach((country) => {
         let singleCountry = `<div class="card">
@@ -33,12 +35,12 @@ function loadCountries(count) {
 function loadCountryDetails(name) {
   let countryName = name.replace("Å", "A").split(" ")[0];
 
-  console.log(countryName);
-
   fetch(`https://restcountries.com/v2/name/${countryName}`)
     .then((response) => response.json())
     .then((country) => {
       const countryDetails = document.getElementById("country-details");
+
+      console.log(country);
 
       countryDetails.innerHTML = `
       <div class="card">
