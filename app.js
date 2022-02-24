@@ -1,9 +1,20 @@
-function loadCountries() {
+// Search country
+function searchCountry(searchTerm) {
+  if (searchTerm.trim() == "") {
+    loadCountries("all");
+  } else {
+    loadCountries(`name/${searchTerm}`);
+  }
+}
+
+function loadCountries(count) {
   const countriesList = document.getElementById("countries");
   countriesList.innerHTML = "Loading...";
-  fetch("https://restcountries.com/v2/all")
+  fetch(`https://restcountries.com/v2/${count}`)
     .then((response) => response.json())
     .then((countries) => {
+      console.log(countries);
+
       countriesList.innerHTML = "";
       countries.forEach((country) => {
         let singleCountry = `<div class="card">
@@ -20,12 +31,13 @@ function loadCountries() {
 }
 
 function loadCountryDetails(name) {
-  let countryName = name.split(" ").join("-");
+  let countryName = name.replace("Å", "A").split(" ")[0];
+
+  console.log(countryName);
 
   fetch(`https://restcountries.com/v2/name/${countryName}`)
     .then((response) => response.json())
     .then((country) => {
-      console.log(country);
       const countryDetails = document.getElementById("country-details");
 
       countryDetails.innerHTML = `
@@ -48,4 +60,4 @@ function loadCountryDetails(name) {
 }
 
 document.onload = loadCountryDetails("bangladesh");
-document.onload = loadCountries();
+document.onload = loadCountries("all");
