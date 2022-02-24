@@ -12,7 +12,9 @@ function loadCountries() {
      <img src="${country.flag}" class="card-img-top" alt="${country.name}" />
      <div class="card-body">
        <h5 class="card-title">${country.name}</h5>
-       <p class="card-text">Capital: <strong> ${country.capital} </strong></p>
+       <p class="card-text">Capital: <strong> ${
+         country.capital || "N/A"
+       } </strong></p>
        <a href="#" class="btn btn-primary" onclick="loadCountryDetails('${country.alpha2Code.toLowerCase()}')">View Details</a>
      </div>
    </div>`;
@@ -41,6 +43,11 @@ function loadCountryDetails(code) {
       console.log(country);
       const countryDetails = document.getElementById("country-details");
 
+      let currency = country.currencies ? country.currencies[0].name : "N/A";
+      let currencySymbol = country.currencies
+        ? country.currencies[0].symbol
+        : "N/A";
+
       countryDetails.innerHTML = `
       <div class="card">
       <img src="${country.flag}" class="card-img-top" alt="${country.name}" />
@@ -61,9 +68,7 @@ function loadCountryDetails(code) {
         <p class="card-text">Timezone: <strong> ${
           country.timezones
         } </strong></p>
-        <p class="card-text">Currency: <strong> ${
-          country.currencies[0].name
-        } (${country.currencies[0].symbol}) </strong></p>
+        <p class="card-text">Currency: <strong> ${currency} (${currencySymbol}) </strong></p>
         <p class="card-text">Languages: <strong> ${
           country.languages[0].name
         } (${country.languages[0].nativeName}) </strong></p>
