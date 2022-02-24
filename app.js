@@ -1,10 +1,12 @@
-fetch("https://restcountries.com/v2/all")
-  .then((response) => response.json())
-  .then((countries) => {
-    const countriesList = document.getElementById("countries");
-
-    countries.forEach((country) => {
-      let singleCountry = `<div class="card">
+function loadCountries() {
+  const countriesList = document.getElementById("countries");
+  countriesList.innerHTML = "Loading...";
+  fetch("https://restcountries.com/v2/all")
+    .then((response) => response.json())
+    .then((countries) => {
+      countriesList.innerHTML = "";
+      countries.forEach((country) => {
+        let singleCountry = `<div class="card">
      <img src="${country.flag}" class="card-img-top" alt="${country.name}" />
      <div class="card-body">
        <h5 class="card-title">${country.name}</h5>
@@ -12,9 +14,10 @@ fetch("https://restcountries.com/v2/all")
        <a href="#" class="btn btn-primary" onclick="loadCountryDetails('${country.name}')">View Details</a>
      </div>
    </div>`;
-      countriesList.innerHTML += singleCountry;
+        countriesList.innerHTML += singleCountry;
+      });
     });
-  });
+}
 
 function loadCountryDetails(name) {
   let countryName = name.split(" ").join("-");
@@ -24,7 +27,7 @@ function loadCountryDetails(name) {
     .then((country) => {
       console.log(country);
       const countryDetails = document.getElementById("country-details");
-      
+
       countryDetails.innerHTML = `
       <div class="card">
       <img src="${country[0].flag}" class="card-img-top" alt="${country[0].name}" />
@@ -43,3 +46,6 @@ function loadCountryDetails(name) {
       `;
     });
 }
+
+document.onload = loadCountryDetails("bangladesh");
+document.onload = loadCountries();
