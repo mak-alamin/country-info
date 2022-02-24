@@ -47,13 +47,25 @@ function loadCountryDetails(code) {
       <div class="card-body">
         <h5 class="card-title">${country.name} (${country.nativeName})</h5>
         <p class="card-text">Capital: <strong> ${country.capital} </strong></p>
-        <p class="card-text">Population: <strong> ${country.population} </strong></p>
+        <p class="card-text">Population: <strong> ${
+          country.population
+        } </strong></p>
         <p class="card-text">Region: <strong> ${country.region} </strong></p>
-        <p class="card-text">Subregion: <strong> ${country.subregion} </strong></p>
-        <p class="card-text">Timezone: <strong> ${country.timezones} </strong></p>
-        <p class="card-text">Currency: <strong> ${country.currencies[0].name} (${country.currencies[0].symbol}) </strong></p>
-        <p class="card-text">Languages: <strong> ${country.languages[0].name} (${country.languages[0].nativeName}) </strong></p>
-        <p class="card-text">Borders: <strong> ${country.borders} </strong></p>
+        <p class="card-text">Subregion: <strong> ${
+          country.subregion
+        } </strong></p>
+        <p class="card-text">Timezone: <strong> ${
+          country.timezones
+        } </strong></p>
+        <p class="card-text">Currency: <strong> ${
+          country.currencies[0].name
+        } (${country.currencies[0].symbol}) </strong></p>
+        <p class="card-text">Languages: <strong> ${
+          country.languages[0].name
+        } (${country.languages[0].nativeName}) </strong></p>
+        <p class="card-text">Borders: <strong> ${
+          country.borders || "N/A"
+        } </strong></p>
       </div>
     </div>
       `;
