@@ -45,8 +45,12 @@ function loadCountryDetails(code) {
       <div class="card">
       <img src="${country.flag}" class="card-img-top" alt="${country.name}" />
       <div class="card-body">
-        <h5 class="card-title">${country.name} (${country.nativeName})</h5>
-        <p class="card-text">Capital: <strong> ${country.capital} </strong></p>
+        <h5 class="card-title">${country.name} (${
+        country.nativeName || ""
+      })</h5>
+        <p class="card-text">Capital: <strong> ${
+          country.capital || "N/A"
+        } </strong></p>
         <p class="card-text">Population: <strong> ${
           country.population
         } </strong></p>
